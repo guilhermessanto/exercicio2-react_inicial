@@ -1,0 +1,15 @@
+.box {
+  display: flex;
+  width: 600px;
+  border: 2px solid black;
+}
+.box img {
+  object-fit: contain;
+  object-position: center;
+  height: 300px;
+  width: 300px;
+}
+.descricao {
+  display: flex;
+  flex-direction: column;
+}

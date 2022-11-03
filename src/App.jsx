@@ -1,46 +1,25 @@
-import "./App.css";
-import { useEffect, useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React from "react";
+import Produtos from "./Produtos";
+import UmProduto from "./UmProduto";
+import Menu from "./Menu";
 
-function App() {
-  const [itens, setItens] = useState([]);
-  useEffect(() => {
-    async function getItens() {
-      try {
-        const res = await fetch("https://fakestoreapi.com/products");
-        const dados = await res.json();
-        setItens(dados);
-      } catch (error) {
-        console.log("Error: " + error.message);
-      }
-    }
-
-    getItens();
-  }, []);
-  console.log(itens);
-
+const App = () => {
   return (
     <>
-      <h1>Exercício 2 </h1>
-      <section>
-        <ul>
-          {itens.map(({ id, title, image, price }) => (
-            <li key={id}>
-              <p>
-                <img class="foto-produto" src={image} alt="" />
-              </p>
-              <h2>{title}</h2>
-              <p>
-                {price.toLocaleString("pt-br", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </section>
+      <BrowserRouter>
+        <Menu />
+        <Switch>
+          <Route exact path="/">
+            <Produtos />
+          </Route>
+          <Route exact path="/products/:id">
+            <UmProduto />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </>
   );
-}
+};
 
 export default App;
